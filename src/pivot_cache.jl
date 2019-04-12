@@ -85,7 +85,7 @@ end
 function pivot_cache(A::Matrix{Float64},
                      B::Matrix{Float64};
                      gram::Bool = false,
-                     use_parallel::Bool = true,
+                     use_parallel::Bool = false,
                      kwargs...)
 
     n = size(A,2)

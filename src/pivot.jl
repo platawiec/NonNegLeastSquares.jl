@@ -20,10 +20,10 @@ function pivot(A::Matrix{Float64},
 
 
     # dimensions, initialize solution
-    p,q = size(A)
+    p, q = size(A)
 
-    x = zeros(q) # primal variables
-    y = -A'*b    # dual variables
+    x = zeros(q)   # primal variables
+    y = -A' * b    # dual variables
 
     # parameters for swapping
     α = 3
@@ -32,7 +32,7 @@ function pivot(A::Matrix{Float64},
     # Store indices for the passive set, P
     #    we want Y[P] == 0, X[P] >= 0
     #    we want X[~P]== 0, Y[~P] >= 0
-    P = BitArray(undef,q)
+    P = BitArray(undef, q)
 
     x[P] =  A[:,P] \ b
     y[(!).(P)] =  A[:,(!).(P)]' * (A[:,P]*x[P] - b)
@@ -82,7 +82,7 @@ end
 ## if multiple right hand sides are provided, solve each problem separately.
 function pivot(A::Matrix{Float64},
                B::Matrix{Float64};
-               use_parallel = true,
+               use_parallel = false,
                kwargs...)
 
     n = size(A,2)
